@@ -1,0 +1,658 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hero title shimmer animation */
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+:root {
+  --glass-light: rgba(255, 255, 255, 0.04);
+  --glass: rgba(10, 20, 38, 0.50);
+  --glass-medium: rgba(10, 20, 38, 0.65);
+  --glass-strong: rgba(10, 20, 38, 0.82);
+  --glass-solid: rgba(8, 15, 28, 0.92);
+  --glass-border: rgba(148, 163, 184, 0.14);
+  --glass-border-hover: rgba(96, 165, 250, 0.35);
+  --glass-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.60);
+  --glass-glow: 0 0 30px -5px rgba(59, 130, 246, 0.25);
+}
+
+@layer base {
+  body {
+    background-color: #030712;
+    color: #f8fafc;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Disable scrollbar on no-scrollbar elements */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ========================================================================
+   APORIA TRACE GLASSMORPHISM DESIGN SYSTEM
+   ======================================================================== */
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-panel-medium {
+  background: var(--glass-medium);
+  backdrop-filter: blur(24px) saturate(130%);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.5);
+}
+
+.glass-panel-strong {
+  background: var(--glass-strong);
+  backdrop-filter: blur(32px) saturate(150%);
+  -webkit-backdrop-filter: blur(32px) saturate(150%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 16px 48px -10px rgba(0, 0, 0, 0.7);
+}
+
+.glass-card {
+  background: rgba(10, 20, 38, 0.58);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(14, 26, 48, 0.72);
+  border-color: rgba(96, 165, 250, 0.32);
+  box-shadow: 0 12px 36px -6px rgba(0, 0, 0, 0.6), 0 0 24px -4px rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  color: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(59, 130, 246, 0.50);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.glass-button-primary {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.88) 0%, rgba(6, 182, 212, 0.88) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  box-shadow: 0 4px 20px -2px rgba(6, 182, 212, 0.35);
+  color: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-button-primary:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(14, 165, 233, 0.95) 100%);
+  box-shadow: 0 8px 28px -2px rgba(6, 182, 212, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+
+/* ========================================================================
+   DESIGN SYSTEM — ENTERPRISE INVESTIGATION PRODUCT
+   ======================================================================== */
+
+/* 1. AMBIENT LIGHTING & MICRO-GRID BACKGROUND
+   Layered radial gradients + dot grid for depth perception */
+.bg-cyber-grid {
+  background-color: #080c15;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.10) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, rgba(14, 165, 233, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 15% 85%, rgba(99, 102, 241, 0.04) 0%, transparent 40%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* 2. GLASSMORPHIC CARD SYSTEM — 4 DEPTH LEVELS
+   Each depth level has increasing visual prominence */
+.cyber-card {
+  background: rgba(15, 22, 38, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.cyber-card-glow {
+  background: rgba(15, 22, 38, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  box-shadow: 0 12px 36px -6px rgba(0, 0, 0, 0.5), 0 0 30px -5px rgba(59, 130, 246, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.cyber-card-elevated {
+  background: rgba(15, 22, 38, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+.cyber-card-inset {
+  background: rgba(8, 12, 21, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. INFORMATION HIERARCHY — PRIORITY CLASSES
+   Visual weight differentiation for findings */
+.priority-critical {
+  border-left: 3px solid #f43f5e;
+  background: linear-gradient(90deg, rgba(244, 63, 94, 0.06) 0%, transparent 40%);
+}
+
+.priority-warning {
+  border-left: 3px solid #f59e0b;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
+}
+
+.priority-info {
+  border-left: 3px solid #3b82f6;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
+}
+
+.priority-muted {
+  opacity: 0.65;
+  filter: saturate(0.7);
+}
+
+.priority-success {
+  border-left: 3px solid #10b981;
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.04) 0%, transparent 40%);
+}
+
+/* 4. PROVENANCE BADGE — INLINE SOURCE ATTRIBUTION
+   Small indicator that traces a data point to its source */
+.provenance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(15, 22, 38, 0.8);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.provenance-badge:hover {
+  border-color: rgba(0, 240, 255, 0.3);
+  color: #00F0FF;
+  background: rgba(0, 240, 255, 0.06);
+}
+
+.provenance-badge-verified {
+  border-color: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+
+.provenance-badge-verified:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+/* 5. EVIDENCE CHAIN — CONNECTED PROVENANCE TRAIL */
+.evidence-chain {
+  position: relative;
+  padding-left: 20px;
+}
+
+.evidence-chain::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(0, 240, 255, 0.4), rgba(59, 130, 246, 0.2), transparent);
+}
+
+.evidence-chain-node {
+  position: relative;
+  padding-left: 4px;
+}
+
+.evidence-chain-node::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 240, 255, 0.5);
+  background: #080c15;
+}
+
+.evidence-chain-node.verified::before {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.evidence-chain-node.conflict::before {
+  background: #f43f5e;
+  border-color: #f43f5e;
+}
+
+/* 6. PROGRESSIVE DISCLOSURE — EXPAND/COLLAPSE */
+.progressive-reveal {
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.progressive-reveal-collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.progressive-reveal-expanded {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.expand-trigger {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease;
+}
+
+.expand-trigger:hover {
+  color: #00F0FF;
+}
+
+.expand-icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+}
+
+.expand-icon-open {
+  transform: rotate(180deg);
+}
+
+/* 7. CONTEXT HIGHLIGHT — CROSS-VIEW LINKING */
+.context-highlight {
+  animation: contextHighlight 1.5s ease-out;
+  border-radius: 8px;
+}
+
+.context-highlight-active {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.cross-link-target {
+  transition: all 0.3s ease;
+  scroll-margin-top: 80px;
+}
+
+.cross-link-target.highlighted {
+  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.5), 0 0 20px -4px rgba(0, 240, 255, 0.2);
+  border-color: rgba(0, 240, 255, 0.4) !important;
+}
+
+/* 8. COMMAND BAR — KEYBOARD-ACCESSIBLE PALETTE */
+.command-bar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 60;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+}
+
+.command-bar {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(13, 21, 39, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.command-bar-input {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: white;
+  font-size: 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  outline: none;
+}
+
+.command-bar-input::placeholder {
+  color: #475569;
+}
+
+.command-bar-results {
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.command-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.command-bar-item:hover,
+.command-bar-item.active {
+  background: rgba(59, 130, 246, 0.12);
+  color: white;
+}
+
+.command-bar-item-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.command-bar-section {
+  padding: 8px 12px 4px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #475569;
+}
+
+.command-bar-kbd {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #64748b;
+  margin-left: auto;
+}
+
+/* 9. CONTEXT MENU — RIGHT-CLICK ACTIONS */
+.context-menu {
+  position: fixed;
+  z-index: 55;
+  min-width: 180px;
+  background: rgba(13, 21, 39, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.6);
+  padding: 4px;
+  backdrop-filter: blur(16px);
+}
+
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.context-menu-item:hover {
+  background: rgba(59, 130, 246, 0.12);
+  color: white;
+}
+
+.context-menu-separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 3px 8px;
+}
+
+/* 10. INVESTIGATION PANEL — FULL-HEIGHT SIDE REGION */
+.investigation-panel {
+  background: rgba(11, 16, 27, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* 11. STATUS BAR — BOTTOM TELEMETRY */
+.status-bar {
+  background: rgba(8, 12, 21, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.status-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #64748b;
+  padding: 0 12px;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+}
+
+.status-bar-item-value {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* 12. CONFIDENCE GAUGE — REUSABLE RING/BAR */
+.confidence-gauge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confidence-gauge-label {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* 13. TOOLTIP — ENHANCED INFORMATION */
+.investigation-tooltip {
+  position: absolute;
+  z-index: 50;
+  padding: 8px 12px;
+  background: rgba(13, 21, 39, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  color: #e2e8f0;
+  max-width: 280px;
+  pointer-events: none;
+}
+
+/* 14. POLISHED ACCENT BADGES */
+.badge-verified {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-info {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-critical {
+  background: rgba(244, 63, 94, 0.1);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+/* 15. DENSITY HEATMAP — TIMELINE ACTIVITY VISUALIZATION */
+.density-heatmap {
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+  height: 32px;
+}
+
+.density-heatmap-bar {
+  flex: 1;
+  min-width: 3px;
+  border-radius: 2px 2px 0 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.density-heatmap-bar:hover {
+  opacity: 1 !important;
+  transform: scaleY(1.15);
+}
+
+/* 16. CUSTOM MINIMALIST SCROLLBARS */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #080c15;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* 17. INVESTIGATION BREADCRUMB */
+.breadcrumb-trail {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #475569;
+}
+
+.breadcrumb-trail-separator {
+  color: #334155;
+}
+
+.breadcrumb-trail-item {
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.breadcrumb-trail-item:hover {
+  color: #00F0FF;
+}
+
+.breadcrumb-trail-item.active {
+  color: #94a3b8;
+}
+
+/* 18. SHIMMER LOADING STATE */
+.shimmer-loading {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* 19. FOCUS RING FOR KEYBOARD NAVIGATION */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+/* ========================================================================
+   PRINT STYLING — EXECUTIVE DOSSIER EXPORT
+   ======================================================================== */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .cyber-card,
+  .cyber-card-glow,
+  .cyber-card-elevated {
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+  .bg-cyber-grid {
+    background: white !important;
+    background-image: none !important;
+  }
+  @page {
+    margin: 1in;
+  }
+}

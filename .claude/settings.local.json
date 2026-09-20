@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -p \"require\\('/Users/shiva/Desktop/NEURAX/frontend/node_modules/lucide-react/package.json'\\).version\")",
+      "Bash(./venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000)",
+      "Bash(curl -s http://localhost:8000/health)",
+      "Bash(curl -s http://localhost:8000/api/v1/investigate/benchmarks)",
+      "Bash(curl -s -X POST http://localhost:8000/api/v1/investigate/run -H 'Content-Type: application/json' -d '{\"target\":{\"name\":\"John\",\"type\":\"handle\",\"context\":\"vague query\"},\"benchmark\":\"case_insufficient\"}')",
+      "Bash(kill %1)",
+      "Bash(./backend/venv/bin/python -c \"import bcrypt; print\\(bcrypt.__version__\\)\")",
+      "Bash(./backend/venv/bin/python -c \"import jwt; print\\(jwt.__version__\\)\")",
+      "Bash(./backend/venv/bin/python -c \"import cryptography; print\\(cryptography.__version__\\)\")"
+    ]
+  }
+}
